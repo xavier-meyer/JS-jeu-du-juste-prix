@@ -1,0 +1,49 @@
+/* police de caractére importée de googlefont*/
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Luckiest+Guy&display=swap');
+/*création class perso*/ 
+:root{
+    --title: #f8c27a;
+    --textShadow: 0 2px 2px rgba(0,0,0,.7);
+    --boxshadow: 0 0px 10px rgba(0,0,0,.2);
+}
+/* body */
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding:0;
+    font-family:sans-serif;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #699bb4 100%);
+}
+/* main */
+main{
+    height: 100%;
+    width: 100%;
+}
+/* section */
+#id-section{
+    height: 100%;
+    width: 100%;
+}
+h1{
+    font-family: 'Luckiest Guy', cursive;
+    margin-bottom: 15px;
+    color: #ffc31d;
+    text-shadow: var(--textShadow);
+    display:inline-block;
+}
+.div-block{
+    background-color:rgba(255,255,255,.2);
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: var(--boxshadow);
+}
+
+/* class perso */
+.fw-bold{
+    font-weight: bold;
+}
+.f-size25{
+    font-style: 25px;
+}
