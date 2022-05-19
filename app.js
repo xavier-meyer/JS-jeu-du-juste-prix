@@ -12,6 +12,7 @@ const difficultNiv = document.getElementById("niv-difficile");
 const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
 const divForm = document.getElementById("hidden-form-number");
+const avertissement = document.getElementById("avertissement");
 // modéles de coeurs
 const coeurVide = '<ion-icon name="heart-outline"></ion-icon>';
 const coeurPlein = '<ion-icon name="heart"></ion-icon>';
@@ -23,17 +24,27 @@ const bgChaud = 'linear-gradient(120deg, #9795f0 0%, #fbc8d4 100%)';
 const bgWin = "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800";
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
 // déclaration variables vies
-let totalVies;
-let vies;
+// let totalVies;
+// let vies;
 // phrase
 let p = document.createElement("p");
+// définir statut joueur
+let statutJeu = false;
+
+
+
+
 // play
+
+
+
+
 const play = () => {
     // tableau qui stocke les saisies 
     let seizedPrices = [];
     let productPrice = 100; 
     console.log(productPrice);
-    selectedLevels();
+    // selectedLevels();
     rejouerBtn.style.display = "none";
     // actualisation à chaque essai- Toute la logique
     formulaire.addEventListener("submit", (e) => {
@@ -84,59 +95,146 @@ const play = () => {
             // on réactives le bouton pour jouer
         }
     } // on ajoutes ou enlèves un certains nombre de coeur au tableau
-    const actualiseCoeurs = (vies) => {
-        divVies.innerHTML = "";
-        let tableauDeVies = [];
-        for(let i = 0; i < vies; i++){
-            tableauDeVies.push(coeurPlein);
-        }
-        for(let i = 0; i < totalVies - vies; i++){
-            tableauDeVies.push(coeurVide);
-        }
-        tableauDeVies.forEach(coeur => {
-            divVies.innerHTML += coeur;
-        })
-    }
-    actualiseCoeurs(vies);
+    // const actualiseCoeurs = (vies) => {
+    //     divVies.innerHTML = "";
+    //     let tableauDeVies = [];
+    //     for(let i = 0; i < vies; i++){
+    //         tableauDeVies.push(coeurPlein);
+    //     }
+    //     for(let i = 0; i < totalVies - vies; i++){
+    //         tableauDeVies.push(coeurVide);
+    //     }
+    //     tableauDeVies.forEach(coeur => {
+    //         divVies.innerHTML += coeur;
+    //     })
+    // }
+    // actualiseCoeurs(vies);
     // forcer rechargement de la page
     rejouerBtn.addEventListener("click", () => {
         message.style.display = "none";
         document.location.reload(true);
     })
     // fonction selection difficultés
-    function selectedLevels(){
-        easyNiv.addEventListener("click", function(){
-            totalVies = 7;
-            vies = 7;
-            p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
-            divNbVies.appendChild(p);
-            actualiseCoeurs(vies);
-            divForm.style.display = "block";
-        })
-        interNiv.addEventListener("click", function(){
-            totalVies = 6;
-            vies = 6;
-            p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
-            divNbVies.appendChild(p);
-            actualiseCoeurs(vies);
-            divForm.style.display = "block";
-        })
-        difficultNiv.addEventListener("click", function(){
-            totalVies = 5;
-            vies = 5;
-            p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
-            divNbVies.appendChild(p);
-            actualiseCoeurs(vies);
-            divForm.style.display = "block";
-        })   
-        nightmareNiv.addEventListener("click", function(){
-            totalVies = 4;
-            vies = 4;
-            p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
-            divNbVies.appendChild(p);
-            actualiseCoeurs(vies);
-            divForm.style.display = "block";
-        })   
+    // function selectedLevels(){
+    //     easyNiv.addEventListener("click", nomFonction(7,divForm,divNbVies,1))
+        
+        
+        
+        
+        // () =>{
+        //     statutJeu = true;
+        //     // empeachChangeLevels();
+        //     totalVies = 7;
+        //     vies = 7;
+        //     p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+        //     divNbVies.appendChild(p);
+        //     actualiseCoeurs(vies);
+        //     divForm.style.display = "block";
+        // })
+        function difficulté(levelNiv,totalVies) {
+            levelNiv.addEventListener("click",() => {
+                let vies = totalVies;
+                statutJeu = true;
+                p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+                divNbVies.appendChild(p);
+                // on ajoutes ou enlèves un certains nombre de coeur au tableau
+                const actualiseCoeurs = (vies) => {
+                    divVies.innerHTML = "";
+                    let tableauDeVies = [];
+                    for(let i = 0; i < totalVies; i++){
+                        tableauDeVies.push(coeurPlein);
+                    }
+                    for(let i = 0; i < totalVies - vies; i++){
+                        tableauDeVies.push(coeurVide);
+                    }
+                    tableauDeVies.forEach(coeur => {
+                        divVies.innerHTML += coeur;
+                    })
+                }
+                divForm.style.display = "block";
+
+            })
+
+       }
+
+       difficulté(easyNiv,7);
+       difficulté(interNiv,6);
+       difficulté(difficultNiv,5);
+       difficulté(nightmareNiv,4);
+
+
+
+
+
+
+        // interNiv.addEventListener("click", function(){
+        //     statutJeu = true;
+        //     // empeachChangeLevels();
+        //     totalVies = 6;
+        //     vies = 6;
+        //     p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+        //     divNbVies.appendChild(p);
+        //     actualiseCoeurs(vies);
+        //     divForm.style.display = "block";
+        // })
+        // difficultNiv.addEventListener("click", function(){
+        //     statutJeu = true;
+        //     // empeachChangeLevels();
+        //     totalVies = 5;
+        //     vies = 5;
+        //     p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+        //     divNbVies.appendChild(p);
+        //     actualiseCoeurs(vies);
+        //     divForm.style.display = "block";
+        // })   
+        // nightmareNiv.addEventListener("click", function(){
+        //     statutJeu = true;
+        //     // empeachChangeLevels();
+        //     totalVies = 4;
+        //     vies = 4;
+        //     p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+        //     divNbVies.appendChild(p);
+        //     actualiseCoeurs(vies);
+        //     divForm.style.display = "block";
+        // })   
     }
-}
+    // Fonction empeachChangeLevels 
+    // function empeachChangeLevels(){
+        // if(statutJeu = true){
+        //     easyNiv.setAttribute("disabled", "");
+        //     interNiv.setAttribute("disabled", "");
+        //     difficultNiv.setAttribute("disabled", "");
+        //     nightmareNiv.setAttribute("disabled", "");
+        //     avertissement.textContent = "Vous êtes sur le point de quitter ce niveau de difficulté!";
+        //     setTimeout(()=>{
+        //         avertissement.textContent= "";
+        //     }, 4500)
+    //         }
+        
+    // Fonction empeachEnterNumber
+    // function empeachEnterNumber(){
+    //     if(statutJeu == false){
+    //         input.addEventListener("keydown", (event)=>{
+    //             let arrayBadLetters = [
+    //                 "e",
+    //                 "-",
+    //                 "+",
+    //                 "0",
+    //                 "1",
+    //                 "2",
+    //                 "3",
+    //                 "4",
+    //                 "5",
+    //                 "6",
+    //                 "7",
+    //                 "8",
+    //                 "9"
+    //             ];
+    //             if(arrayBadLetters.includes(event.key)){
+    //                 event.preventDefault();
+    //             }
+    //         })
+    //     }
+    
+
 play();
