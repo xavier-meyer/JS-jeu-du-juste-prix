@@ -8,37 +8,39 @@
     <link rel="stylesheet" href="./bootstrap.css">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body> 
+    <header>
+        <h1>Bienvenue sur mon site de jeu</h1>
+    </header>
     <main>
-        <section id="id-section" class="row d-flex justify-content-center align-items-center mx-0 px-0">
-            <div class="col-10 col-md-4 d-flex justify-content-center align-items-center flex-column">
-                <p class="fw-bold f-size25">un magnifique blender</p>
-                <img src="./images/blender.jpg" alt="photo de blender" class="col-8 img-size">
+        <section class="section-principale">      
+            <div class="section-image">
+                <p>un magnifique blender</p>
+                <img src="./images/blender.jpg" alt="photo de blender" class="img-size">
             </div>
-            <div class="col-10 col-md-5 d-flex justify-content-center align-items-center flex-column div-block">
-                <h1 class="text-center">Trouve son prix</h1>
-                <p id="message" class="my-3">Veuillez choisir votre niveau de difficulté:</p>
+            <div class="section-formulaire">
+                <h1>Trouve son prix</h1>
+                <p id="message">Veuillez choisir votre niveau de difficulté:</p>
                 <div id="niv-difficulte">
-                    <button id="niv-facile" type="button" class="btn btn-success mx-3">Facile</button>
+                    <button id="niv-facile" type="button" class="btn btn-success">Facile</button>
                     <button id="niv-inter" type="button" class="btn btn-warning">Intermédiaire</button>
-                    <button id="niv-difficile" type="button" class="btn btn-danger mx-3">Difficile</button>
+                    <button id="niv-difficile" type="button" class="btn btn-danger">Difficile</button>
                     <button id="niv-cauchemar" type="button" class="btn btn-dark" >Cauchemar</button>
                 </div>
-                <div id="nbVies" class="my-3"></div>
+                <div id="nbVies"></div>
                 <div class="vies">
-                    <ion-icon name="heart-outline"></ion-icon>
-                    <ion-icon name="heart"></ion-icon>
+                   <img src="./images/coeur-vide.png" class="heart-size" alt="rajouter des coeurs vides">
+                   <img src="./images/coeur-plein.png" class="heart-size" alt="rajouter des coeurs pleins">
                 </div>
                 <form id="inputBox">
                     <div id="hidden-form-number">
                         <label for="number">Entrez un nombre:</label>  
                         <input type="number" id="number" min="0" max="1000" maxlength="4" required>
                         <button type="submit" id="essayerBtn" class="btn btn-info">Essayer</button>  
+                        <button type="button" id="rejouerBtn" class="btn btn-primary">rejouer</button>
                     </div> 
-                    <button id="rejouerBtn" class="my-4 btn btn-secondary">rejouer</button>
-                </form>  
-                <span id="avertissement" class="my-3"></span>  
-                <p id="details" class="my-4">* Brûlant = &plusmn; 25 ; Chaud = &plusmn; 50  ; Tiéde = &plusmn; 75 ; Froid = +75.</p>
+                </form>   
+                <p id="details">* Brûlant = &plusmn; 25 ; Chaud = &plusmn; 50  ; Tiéde = &plusmn; 75 ; Froid = +75.</p>
             </div>    
         </section>
     </main>
