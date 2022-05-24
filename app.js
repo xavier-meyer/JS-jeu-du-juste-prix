@@ -12,6 +12,7 @@ const difficultNiv = document.getElementById("niv-difficile");
 const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
 const divForm = document.getElementById("hidden-form-number");
+// const annulerBtn = document.getElementById("annulerBtn");
 // modéles de coeur
 const coeurVide = '<img src="./images/coeur-vide.png" class="heart-size" alt="insérer coeur vide"></img>'
 const coeurPlein = '<img src="./images/coeur-plein.png" class="heart-size" alt="insérer coeur plein"></img>'
@@ -27,6 +28,8 @@ let totalVies;
 let vies;
 // phrase
 let p = document.createElement("p");
+// définir statut joueur
+let statutJeu = false;
 // play
 const play = () => {
     // tableau qui stocke les saisies 
@@ -104,9 +107,11 @@ const play = () => {
     })
     function difficulte(levelNiv,nbVies,nbViesTotals) {
         levelNiv.addEventListener("click",() => {
+            message.style.display = "block";
             vies = nbVies;
             totalVies = nbViesTotals;
             statutJeu = true;
+            empeachChangeLevel();
             p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
@@ -118,6 +123,18 @@ const play = () => {
    difficulte(difficultNiv,5,5);
    difficulte(nightmareNiv,4,4);
 
+    // fonction empeachChangeLevel
+    function empeachChangeLevel(){
+        if(statutJeu == true){
+            let levelNiv = [interNiv, easyNiv, nightmareNiv, difficultNiv];
+           levelNiv.forEach(levelNivs => {
+               levelNivs.style.display = "none";
+           });
+           message.style.display = "none";
+        }
+    }    
+
 }
 play();
 
+ 
