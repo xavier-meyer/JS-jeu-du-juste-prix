@@ -12,7 +12,7 @@ const difficultNiv = document.getElementById("niv-difficile");
 const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
 const divForm = document.getElementById("hidden-form-number");
-// const annulerBtn = document.getElementById("annulerBtn");
+const annulerBtn = document.getElementById("annulerBtn");
 // modéles de coeur
 const coeurVide = '<img src="./images/coeur-vide.png" class="heart-size" alt="insérer coeur vide"></img>'
 const coeurPlein = '<img src="./images/coeur-plein.png" class="heart-size" alt="insérer coeur plein"></img>'
@@ -107,6 +107,7 @@ const play = () => {
     })
     function difficulte(levelNiv,nbVies,nbViesTotals) {
         levelNiv.addEventListener("click",() => {
+            annulerBtn.style.display = "block";
             message.style.display = "block";
             vies = nbVies;
             totalVies = nbViesTotals;
@@ -116,6 +117,7 @@ const play = () => {
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
             divForm.style.display = "block";
+            leaveLevel();
         })
     }
    difficulte(easyNiv,7,7);
@@ -132,8 +134,16 @@ const play = () => {
            });
            message.style.display = "none";
         }
-    }    
-
+    } 
+    // fonction leaveLevel
+    function leaveLevel(){
+        if(statutJeu == true){
+            annulerBtn.addEventListener("click", () => {
+                document.location.reload(true);
+            });
+        }
+      
+    }
 }
 play();
 
