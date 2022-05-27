@@ -34,14 +34,16 @@
                 </div>
                 <form id="inputBox">
                     <div id="hidden-form-number">
-                        <label for="number">Entrez un nombre:</label>  
-                        <input type="number" id="number" min="0" max="1000" maxlength="4" required>
+                        <label for="number" id="label-number">Entrez un nombre:</label>  
+                        <input type="number" id="number" min="0" max="1000" required>
+                        <span id="avertissement"></span>
                         <button type="submit" id="essayerBtn" class="btn btn-info">Essayer</button>  
                         <button type="button" id="rejouerBtn" class="btn btn-primary">Rejouer</button>
                     </div>
                 </form>      
-                    <div>
-                        <button type="button" id="annulerBtn" class="btn btn-primary">Annuler</button>
+                    <div id="buttons">
+                        <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                        <button type="button" id="annulerBtn" class="btn btn-perso">Annuler</button>
                     </div>
                 <p id="details">* Brûlant = &plusmn; 25 ; Chaud = &plusmn; 50  ; Tiéde = &plusmn; 75 ; Froid = +75.</p>
             </div>    

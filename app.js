@@ -13,6 +13,8 @@ const divNbVies = document.getElementById("nbVies");
 const nightmareNiv = document.getElementById("niv-cauchemar");
 const divForm = document.getElementById("hidden-form-number");
 const annulerBtn = document.getElementById("annulerBtn");
+const avertissement = document.getElementById("avertissement");
+const resetBtn  = document.getElementById("resetBtn");
 // modéles de coeur
 const coeurVide = '<img src="./images/coeur-vide.png" class="heart-size" alt="insérer coeur vide"></img>'
 const coeurPlein = '<img src="./images/coeur-plein.png" class="heart-size" alt="insérer coeur plein"></img>'
@@ -23,6 +25,7 @@ const bgBrulant = 'linear-gradient(120deg, #ff0844 0%, #ffb199 100%)';
 const bgChaud = 'linear-gradient(120deg, #9795f0 0%, #fbc8d4 100%)';
 const bgWin = 'linear-gradient(-225deg, #231557 0%,#f10665 29%, #f1061f 67%)';
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%';
+const bgError = 'linear-gradient(120deg, #c31818 0%, #5b0d0d 100%';
 // déclaration variables vies
 let totalVies;
 let vies;
@@ -32,6 +35,7 @@ let p = document.createElement("p");
 let statutJeu = false;
 // play
 const play = () => {
+    empeachSeizeNumber();
     // tableau qui stocke les saisies 
     let seizedPrices = [];
     let productPrice = 100; 
@@ -44,9 +48,15 @@ const play = () => {
         // return => arrêt du formulaire
         if(valeurInput === productPrice){
             body.style.backgroundImage = bgWin;
+            body.style.color = "white";
             message.textContent = `BRAVO !!! le prix était bien de ${productPrice} euros`;
-
+            message.style.display = "block";
+            essayerBtn.style.display = "none";
             rejouerBtn.style.display = "block";
+            annulerBtn.style.display = "none";
+            resetBtn.style.display = "none";
+            p.textContent = "";
+            divVies.style.display = "none";
         }
         // on définit le comportement en fonction de la valeur du nombre
         // sinon si la valeur de l'input est différente du prix défini et que la valeur de l'input est présente dans le tableau
@@ -78,11 +88,13 @@ const play = () => {
     const verifyLoose = () => {
         if(vies === 0){
             body.style.backgroundImage = bgLoose;
-            body.style.color = "#990000";
+            body.style.color = "#FFFF";
             essayerBtn.setAttribute("disabled", "") // disabled => rendre le bouton non cliquable
             //setAttribute => ajouter un attribut au bouton 
             message.textContent = `Vous avez perdu. Le prix était de ${productPrice} euros`;
             rejouerBtn.style.display = "block";
+            annulerBtn.style.display = "none";
+            essayerBtn.style.display= "none";
             // on réactives le bouton pour jouer
         }
     } // on ajoutes ou enlèves un certains nombre de coeur au tableau
@@ -105,25 +117,37 @@ const play = () => {
         message.style.display = "none";
         document.location.reload(true);
     })
+    // fonction difficulte
     function difficulte(levelNiv,nbVies,nbViesTotals) {
+        // on écoutes l'évenement click des boutons et on lance une fonction anonyme
         levelNiv.addEventListener("click",() => {
+            statutJeu = true;
+            resetBtn.style.display = "block";
+            // on enléves l'attribut sur le bouton essayer pour le rendre de nouveau cliquable
+            essayerBtn.style.display = "block";
+            // on fait disparaitre le contenu du span avertissement
             annulerBtn.style.display = "block";
+            // on fait apparaitre le message "veuillez choisir votre niveau de difficulté"
             message.style.display = "block";
+            // on attribue à la variable vies la valeur de nbVies
             vies = nbVies;
             totalVies = nbViesTotals;
-            statutJeu = true;
+            // on appelle et lance la fonction empeachLevel();
             empeachChangeLevel();
+            // on rajoutes du contenu HTML directement en JS à la balise P
             p.textContent = `Trouvez un nombre entre 0 et 1000. Vous avez ${vies} vies.`;
+            // le paragraphe P devient un élement enfant de la div  
             divNbVies.appendChild(p);
             actualiseCoeurs(vies);
+            resetCoeurs(vies);
             divForm.style.display = "block";
-            leaveLevel();
-        })
-    }
-   difficulte(easyNiv,7,7);
-   difficulte(interNiv,6,6);
-   difficulte(difficultNiv,5,5);
-   difficulte(nightmareNiv,4,4);
+            leaveLevel();  
+        })             
+    }    
+    difficulte(easyNiv,7,7);    
+    difficulte(interNiv,6,6);
+    difficulte(difficultNiv,5,5);
+    difficulte(nightmareNiv,4,4);
 
     // fonction empeachChangeLevel
     function empeachChangeLevel(){
@@ -142,9 +166,41 @@ const play = () => {
                 document.location.reload(true);
             });
         }
-      
     }
-}
+    // fonction empeachSeizeNumber
+    function empeachSeizeNumber(){  
+        input.addEventListener("keydown", () => {
+            if(statutJeu == false){
+                avertissement.textContent = "Vous devez revenir à l'écran d'accueil puis sélectionnez un niveau de difficulté!";
+                avertissement.style.display = "block";
+                setTimeout( () => {
+                    avertissement.style.display = "none";
+                },4500 ) 
+                rejouerBtn.style.display = "block";
+                essayerBtn.style.display = "none";
+                message.style.display = "none";
+                let levelNiv = [interNiv, easyNiv, nightmareNiv, difficultNiv];
+                levelNiv.forEach(levelNivs => {
+                    levelNivs.style.display = "none";
+                })
+                body.style.backgroundImage = bgError; 
+                body.style.color = "white";
+            }   
+        })  
+       
+    }   
+    // fonction resetCoeurs
+   const resetCoeurs = (vies) => {
+        divVies.innerHTML = "";
+        let tableauDeVies = [];
+        for(let i = 0; i < vies; i++){
+            tableauDeVies.push(coeurPlein);
+        }
+        tableauDeVies.forEach(coeur => {
+            divVies.innerHTML += coeur;
+        })
+    }
+} 
 play();
 
  

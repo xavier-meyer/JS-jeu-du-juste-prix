@@ -3,6 +3,7 @@
     --text-align: center;
     --margin-top-20: 20px;
     --margin-top-10: 10px;
+    --margin-top-15 :15px;
     --text-transform: uppercase;
     --padding-title: 20px;
     --margin-top-40: 40px;
@@ -11,6 +12,9 @@
     --margin-40:40px;
     --margin-left-10: 10px;
     --margin-left-15: 15px;
+    --color-button-reset: grey;
+    --color-button-secondary: white;
+    --margin-bottom-15: 15px;
 }
 
 /*body*/
@@ -94,10 +98,30 @@ main h2{
 }
 #essayerBtn{
     margin-left: var(--margin-left-10);
+    color: var(--color-button-secondary);
 }
 #niv-inter,#niv-difficile,#niv-cauchemar{
     margin-left: var(--margin-left-15);
 }
 #annulerBtn{
     display: none;
+    margin-left: var(--margin-left-15);
+}
+#buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#resetBtn{
+    margin-left: var(--margin-left-15);
+    display: none;
+}
+.btn-perso{
+    background-color: rgb(219, 201, 36);
+    color: var(--color-button-secondary);
+}
+#avertissement{
+    margin-top: var(--margin-top-15);
+    margin-bottom : var(--margin-bottom-15);
+    color: white;
 }
